@@ -1,0 +1,15 @@
+
+{
+    "authentication": {
+        "options": {
+            "userName": "memedueladmin", 
+            "password": "xZJ!GR8ruSFP@p#6" 
+        },
+        "type": "default"
+    },
+    "server": "memeduel.database.windows.net",
+    "options": {
+        "database": "MemeDuel_MainDB",
+        "encrypt": true
+    }
+  }
