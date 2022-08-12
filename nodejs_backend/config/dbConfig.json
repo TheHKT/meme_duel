@@ -1,15 +1,15 @@
-
 {
-    "authentication": {
-        "options": {
-            "userName": "memedueladmin", 
-            "password": "xZJ!GR8ruSFP@p#6" 
-        },
-        "type": "default"
-    },
+    "user": "memedueladmin",
+    "password": "xZJ!GR8ruSFP@p#6",
+    "database": "MemeDuel_MainDB",
     "server": "memeduel.database.windows.net",
+    "pool": {
+      "max": 10,
+      "min": 0,
+      "idleTimeoutMillis": 30000
+    },
     "options": {
-        "database": "MemeDuel_MainDB",
-        "encrypt": true
+      "encrypt": true,
+      "trustServerCertificate": false 
     }
   }
