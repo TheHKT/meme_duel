@@ -25,10 +25,15 @@ async function main() {
     app.put("/login", async (req, res) => {
         try {
             const inputData = req.body;
-            const result = await sql.query`select * from Player`
-            console.dir(result)
+            const result = await sql.query(`SELECT * FROM Player WHERE username='${inputData.username}'`);
+            if(result.recordset[0].pw == inputData.pw){
+                console.log("SUCESSFUL LOGIN")
+            } else {
+                console.log("FUCK OFF")
+            }
             res.status(200).send(result)
         } catch (err) {
+            console.log(err);
             res.status(500).send(err);
         }
     })
