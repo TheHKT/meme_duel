@@ -11,7 +11,7 @@ async function main() {
         await sql.connect(DB_config)
         console.log("connected to db...")
     } catch (err) {
-        console.err("could not connect to db...");
+        console.log("could not connect to db...");
     }
 
     app.get("/status", async (req, res) => {
