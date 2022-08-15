@@ -14,3 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+Dont forget to add yout own IP in a config/config.json file
+{
+    "port":"3000",
+    "hostIP":"172.20.10.4"
+}
