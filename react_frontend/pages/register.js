@@ -37,7 +37,7 @@ export const Register = ({ navigation }) => {
             <View>
                 <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
-                <TextInput inputAccessoryViewID={inputAccessoryViewID} style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
+                <TextInput keyboardDismissMode="interactive" style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
                 <Text>E-Mail: </Text>
@@ -57,11 +57,9 @@ export const Register = ({ navigation }) => {
                     placeholder="Enter Email"
                     onChangeText={(value) => setEmail(value)}
                 />
-                <InputAccessoryView nativeID={inputAccessoryViewID}>
                 <View style={styles.button}>
                     <Button title="Submit" onPress={doRegister} />
                 </View>
-                </InputAccessoryView>
             </View>
         </View>
     )
