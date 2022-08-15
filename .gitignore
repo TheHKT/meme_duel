@@ -49,3 +49,23 @@ app.*.map.json
 
 /react_frontend/config/config.json
 react_frontend/config/config.json
+
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+
+
+#frontend
+**/config.json
+
+# macOS
+.DS_Store
