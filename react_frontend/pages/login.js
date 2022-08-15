@@ -19,7 +19,10 @@ export const Login = ({ navigation }) => {
                 username: `${username}`,
                 pw: `${pw}`
             })
-        }).catch(err => alert("An error occurred!"));
+        })
+        .then(res => res.json())
+        .then(response => response.errorOccurred ? alert(response.errorMessage) : alert (JSON.stringify(response)))
+        .catch(err => alert("An error occurred!"));
     }
     return (
         <View style={styles.container}>

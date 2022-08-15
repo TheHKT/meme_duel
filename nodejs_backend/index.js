@@ -24,9 +24,23 @@ async function main() {
     });
 
     app.put("/login", async (req, res) => {
+        const resData = {
+            errorOccurred: false,
+            errorMessage: "NaN",
+            Data: {}
+        }
         try {
             const inputData = req.body;
             const result = await sql.query(`SELECT * FROM Player WHERE username='${inputData.username}'`);
+            if(result.recordset.length==0){
+                throw {
+                    name: "Unkown User",
+                    message: "Username is not registered",
+                    toString: function() {
+                      return this.name + ": " + this.message;
+                    }
+                  };
+            }
             if(result.recordset[0].pw == inputData.pw){ //TODO check if this username even exists in db? if not than return a json
                 console.log("SUCESSFUL LOGIN")
             } else {
@@ -34,8 +48,10 @@ async function main() {
             }
             res.status(200).send(result)
         } catch (err) {
+            resData.errorOccurred=true;
+            resData.errorMessage=err.message;
             console.log(err);
-            res.status(500).send(err);
+            res.status(500).send(resData);
         }
     })
 
