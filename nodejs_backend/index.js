@@ -28,7 +28,7 @@ async function main() {
             loginSucess: false,
             Data: {},
             errorOccurred: false,
-            errorMessage: "NaN",
+            errorMessage: "Unknown Error occurred!",
         }
         const inputData = req.body;
         const ps = new sql.PreparedStatement()
