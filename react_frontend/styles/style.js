@@ -8,9 +8,8 @@ export const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     header: {
-      backgroundColor: 'pink',
-      padding: 20,
-      alignItems: 'center'
+      alignItems: 'center',
+      alignSelf: 'center'
     },
     boldText: {
       fontWeight: 'bold'
@@ -20,7 +19,7 @@ export const styles = StyleSheet.create({
       padding: 20
     },
     button: {
-      marginTop: 20
+      padding: 10
     },
     input: {
       borderWidth: 1,
