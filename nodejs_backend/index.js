@@ -1,7 +1,6 @@
 const config = require('../react_frontend/config/config.json');
 const DB_config = require("../react_frontend/config/dbConfig.json");
 const express = require("express");
-const axios = require("axios"); //TODO might not need axios
 const sql = require("mssql");
 
 async function main() {
