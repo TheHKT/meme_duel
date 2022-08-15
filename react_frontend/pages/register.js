@@ -3,6 +3,9 @@ import { Text, View, Button, TextInput } from 'react-native';
 import { styles } from '../styles/style.js';
 import { useState } from 'react';
 import config from '../config/config.json'
+import * as React from "react";
+import { Input } from "@rneui/base";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 
@@ -12,7 +15,7 @@ export const Register = ({ navigation }) => {
     const [email, setEmail] = useState("")
 
 
-    const doLogin = () => {
+    const doRegister = () => {
         fetch(`http://${config.hostIP}:${config.port}/registerPlayer`, {
             method: 'POST',
             headers: {
@@ -36,11 +39,29 @@ export const Register = ({ navigation }) => {
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
                 <Text>E-Mail: </Text>
-                <TextInput style={styles.input} placeholder="{E-Mail}" onChangeText={(value) => setEmail(value)} />
+                <Input
+                    containerStyle={styles.input}
+                    disabledInputStyle={{ background: "#ddd" }}
+                    //inputContainerStyle={{}}
+                    //errorMessage="Oops! that's not correct."
+                    //errorProps={{}}
+                    //errorStyle={{}}
+                   // inputStyle={{}}
+                    label="User Form"
+                    labelStyle={{}}
+                    labelProps={{}}
+                    rightIcon={<Icon name="close" size={20} />}
+                    rightIconContainerStyle={{}}
+                    placeholder="Enter Email"
+                    onChangeText={(value) => setEmail(value)}
+                />
                 <View style={styles.button}>
-                    <Button title="Submit" onPress={doLogin} />
+                    <Button title="Submit" onPress={doRegister} />
                 </View>
             </View>
         </View>
     )
 }
+
+
+
