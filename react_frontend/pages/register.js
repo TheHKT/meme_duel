@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, TextInput } from 'react-native';
+import { Text, View, Button, TextInput, InputAccessoryView } from 'react-native';
 import { styles } from '../styles/style.js';
 import { useState } from 'react';
 import config from '../config/config.json'
@@ -35,7 +35,7 @@ export const Register = ({ navigation }) => {
             <View>
                 <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
-                <TextInput style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
+                <TextInput inputAccessoryViewID={inputAccessoryViewID} style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
                 <Text>E-Mail: </Text>
