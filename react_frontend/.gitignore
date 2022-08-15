@@ -13,7 +13,7 @@ web-build/
 
 
 #frontend
-
+**/config.json
 
 # macOS
 .DS_Store
