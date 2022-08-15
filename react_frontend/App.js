@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { useState } from 'react';
 import customData from './config/config.json';
+import { styles } from './styles/style';
 
 export default function App() {
   const [name, setName] = useState("Hektor");
@@ -61,34 +62,3 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  header: {
-    backgroundColor: 'pink',
-    padding: 20,
-    alignItems: 'center'
-  },
-  boldText: {
-    fontWeight: 'bold'
-  },
-  body: {
-    backgroundColor: 'yellow',
-    padding: 20
-  },
-  button: {
-    marginTop: 20
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#777",
-    padding: 8,
-    margin: 10,
-    width: 200
-  }
-
-});
