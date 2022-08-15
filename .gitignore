@@ -47,5 +47,5 @@ app.*.map.json
 /android/app/release
 
 
-**/config.json
+/react_frontend/config/config.json
 react_frontend/config/config.json
