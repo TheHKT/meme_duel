@@ -57,6 +57,7 @@ export const Register = ({ navigation }) => {
                     placeholder="Enter Email"
                     onChangeText={(value) => setEmail(value)}
                 />
+                <InputAccessoryView nativeID={inputAccessoryViewID}></InputAccessoryView>
                 <View style={styles.button}>
                     <Button title="Submit" onPress={doRegister} />
                 </View>
