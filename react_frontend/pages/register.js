@@ -34,10 +34,10 @@ export const Register = ({ navigation }) => {
     }
     return (
         <View style={styles.container}>
-            <View>
+            <View keyboardDismissMode="interactive">
                 <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
-                <TextInput keyboardDismissMode="interactive" style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
+                <TextInput  style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
                 <Text>E-Mail: </Text>
