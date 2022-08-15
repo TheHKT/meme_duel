@@ -27,26 +27,29 @@ async function main() {
         const resData = {
             errorOccurred: false,
             errorMessage: "NaN",
+            loginSucess: false,
             Data: {}
         }
         try {
             const inputData = req.body;
             const result = await sql.query(`SELECT * FROM Player WHERE username='${inputData.username}'`);
-            if(result.recordset.length==0){
+            if(result.recordset.length != 1){
                 throw {
                     name: "Unkown User",
                     message: "Username is not registered",
-                    toString: function() {
-                      return this.name + ": " + this.message;
-                    }
                   };
             }
             if(result.recordset[0].pw == inputData.pw){ //TODO check if this username even exists in db? if not than return a json
-                console.log("SUCESSFUL LOGIN")
+                resData.loginSucess=true;
+                console.log("SUCESSFUL LOGIN");
+                resData.Data=result.recordset[0];
+                res.status(200).send(resData);
             } else {
-                console.log("FUCK OFF")
+                throw {
+                    name: "Wrong PW",
+                    message: "This password does not match!",
+                  };
             }
-            res.status(200).send(result)
         } catch (err) {
             resData.errorOccurred=true;
             resData.errorMessage=err.message;
