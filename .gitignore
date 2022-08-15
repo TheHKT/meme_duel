@@ -47,4 +47,4 @@ app.*.map.json
 /android/app/release
 
 
-config.json
+**/config.json
