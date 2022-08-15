@@ -14,10 +14,10 @@ async function main() {
     }
 
     app.get("/status", async (req, res) => {
-        
+
         try {
             console.log("/status");
-            res.status(200).send({"status":"Backend is running!"});
+            res.status(200).send({ "status": "Backend is running!" });
         } catch (err) {
             res.status(500).send(err);
         }
@@ -25,35 +25,45 @@ async function main() {
 
     app.put("/login", async (req, res) => {
         const resData = {
+            loginSucess: false,
+            Data: {},
             errorOccurred: false,
             errorMessage: "NaN",
-            Data: {}
         }
-        try {
             const inputData = req.body;
-            const result = await sql.query(`SELECT * FROM Player WHERE username='${inputData.username}'`);
-            if(result.recordset.length==0){
-                throw {
-                    name: "Unkown User",
-                    message: "Username is not registered",
-                    toString: function() {
-                      return this.name + ": " + this.message;
+            const ps = new sql.PreparedStatement()
+            ps.input('username', sql.VarChar)
+            ps.prepare("SELECT * FROM Player WHERE username=@username", err => {
+                ps.execute({ username: inputData.username }, (err, result) => {
+                    try {
+                        if (result.recordset.length != 1) {
+                            throw {
+                                name: "Unkown User",
+                                message: "Username is not registered",
+                            };
+                        }
+                        if (result.recordset[0].pw == inputData.pw) { //TODO check if this username even exists in db? if not than return a json
+                            resData.loginSucess = true;
+                            console.log("SUCESSFUL LOGIN");
+                            resData.Data = result.recordset[0];
+                        } else {
+                            throw {
+                                name: "Wrong PW",
+                                message: "This password does not match!",
+                            };
+                        }
+                    } catch (err) {
+                        resData.errorOccurred = true;
+                        resData.errorMessage = err.message;
+                        console.log(err);
+                        //res.status(500).send(resData);
                     }
-                  };
-            }
-            if(result.recordset[0].pw == inputData.pw){ //TODO check if this username even exists in db? if not than return a json
-                console.log("SUCESSFUL LOGIN")
-            } else {
-                console.log("FUCK OFF")
-            }
-            res.status(200).send(result)
-        } catch (err) {
-            resData.errorOccurred=true;
-            resData.errorMessage=err.message;
-            console.log(err);
-            res.status(500).send(resData);
-        }
-    })
+                    ps.unprepare(err => {
+                        res.status(200).send(resData);
+                    })
+                })
+            })
+        })
 
     app.post("/registerPlayer", async (req, res) => {
         try {
