@@ -30,40 +30,45 @@ async function main() {
             errorOccurred: false,
             errorMessage: "NaN",
         }
-            const inputData = req.body;
-            const ps = new sql.PreparedStatement()
-            ps.input('username', sql.VarChar)
-            ps.prepare("SELECT * FROM Player WHERE username=@username", err => {
-                ps.execute({ username: inputData.username }, (err, result) => {
-                    try {
-                        if (result.recordset.length != 1) {
-                            throw {
-                                name: "Unkown User",
-                                message: "Username is not registered",
-                            };
-                        }
-                        if (result.recordset[0].pw == inputData.pw) { //TODO check if this username even exists in db? if not than return a json
-                            resData.loginSucess = true;
-                            console.log("SUCESSFUL LOGIN");
-                            resData.Data = result.recordset[0];
-                        } else {
-                            throw {
-                                name: "Wrong PW",
-                                message: "This password does not match!",
-                            };
-                        }
-                    } catch (err) {
-                        resData.errorOccurred = true;
-                        resData.errorMessage = err.message;
-                        console.log(err);
-                        //res.status(500).send(resData);
+        const inputData = req.body;
+        const ps = new sql.PreparedStatement()
+        ps.input('username', sql.VarChar)
+        ps.prepare("SELECT * FROM Player WHERE username=@username", err => {
+            ps.execute({ username: inputData.username }, (err, result) => {
+                try {
+                    if (result.recordset.length != 1) {
+                        throw {
+                            name: "Unkown User",
+                            message: "Username is not registered",
+                        };
                     }
-                    ps.unprepare(err => {
+                    if (result.recordset[0].pw == inputData.pw) { //TODO check if this username even exists in db? if not than return a json
+                        resData.loginSucess = true;
+                        console.log("SUCESSFUL LOGIN");
+                        resData.Data = result.recordset[0];
+                    } else {
+                        throw {
+                            name: "Wrong PW",
+                            message: "This password does not match!",
+                        };
+                    }
+                } catch (err) {
+                    resData.errorOccurred = true;
+                    resData.errorMessage = err.message;
+                    console.log(err);
+                    //res.status(500).send(resData);
+                }
+                ps.unprepare(err => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send(resData);
+                    } else {
                         res.status(200).send(resData);
-                    })
+                    }
                 })
             })
         })
+    })
 
     app.post("/registerPlayer", async (req, res) => {
         try {
