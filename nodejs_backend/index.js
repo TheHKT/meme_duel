@@ -1,5 +1,5 @@
-const config = require('./config/config.json');
-const DB_config = require("./config/dbConfig.json");
+const config = require('../react_frontend/config/config.json');
+const DB_config = require("../react_frontend/config/dbConfig.json");
 const express = require("express");
 const axios = require("axios"); //TODO might not need axios
 const sql = require("mssql");
@@ -15,8 +15,10 @@ async function main() {
     }
 
     app.get("/status", async (req, res) => {
+        
         try {
-            res.status(200).send('{"status":"Backend is running!"}');
+            console.log("/status");
+            res.status(200).send({"status":"Backend is running!"});
         } catch (err) {
             res.status(500).send(err);
         }
