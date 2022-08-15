@@ -34,10 +34,15 @@ export const Register = ({ navigation }) => {
         <View style={styles.container}>
             <View>
                 <Text style={styles.header}>Register</Text>
+                <ScrollView keyboardDismissMode="interactive">
                 <Text>Username:</Text>
                 <TextInput style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
+                </ScrollView>
+                <ScrollView keyboardDismissMode="interactive">
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
+                </ScrollView>
+                <ScrollView keyboardDismissMode="interactive">
                 <Text>E-Mail: </Text>
                 <Input
                     containerStyle={styles.input}
@@ -55,6 +60,7 @@ export const Register = ({ navigation }) => {
                     placeholder="Enter Email"
                     onChangeText={(value) => setEmail(value)}
                 />
+                </ScrollView>
                 <View style={styles.button}>
                     <Button title="Submit" onPress={doRegister} />
                 </View>
