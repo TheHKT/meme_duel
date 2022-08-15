@@ -13,23 +13,24 @@ export const Register = ({ navigation }) => {
 
 
     const doLogin = () => {
-        fetch(`http://${config.hostIP}:${config.port}/login`, {
-            method: 'PUT',
+        fetch(`http://${config.hostIP}:${config.port}/registerPlayer`, {
+            method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 username: `${username}`,
-                pw: `${pw}`,
-                email: `${email}`
+                email: `${email}`,
+                pw: `${pw}`
+
             })
         }).catch(err => console.log(err));
     }
     return (
         <View style={styles.container}>
             <View>
-                <Text style={styles.header}>LOGIN</Text>
+                <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
                 <TextInput style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
                 <Text>Password: </Text>
