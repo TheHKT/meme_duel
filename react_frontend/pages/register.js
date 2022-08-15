@@ -42,7 +42,7 @@ export const Register = ({ navigation }) => {
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
                 <Text>E-Mail: </Text>
-                <TextInput
+                <Input
                     containerStyle={styles.input}
                     disabledInputStyle={{ background: "#ddd" }}
                     //inputContainerStyle={{}}
