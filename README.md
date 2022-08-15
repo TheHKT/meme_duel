@@ -1,6 +1,6 @@
 # meme_duel
 
-A new Flutter project.
+Hektor ist eine schwule sau und muss abnehmen
 
 ## Getting Started
 
