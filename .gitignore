@@ -69,3 +69,4 @@ web-build/
 
 # macOS
 .DS_Store
+react_frontend/package-lock.json
