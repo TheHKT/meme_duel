@@ -9,7 +9,12 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-**/config.json
+
+
+
+#frontend
+
+react_frontend/config/config.json
 
 # macOS
 .DS_Store
