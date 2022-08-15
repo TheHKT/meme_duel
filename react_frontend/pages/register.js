@@ -14,6 +14,8 @@ export const Register = ({ navigation }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("")
 
+    const inputAccessoryViewID = 'uniqueID';
+
 
     const doRegister = () => {
         fetch(`http://${config.hostIP}:${config.port}/registerPlayer`, {
