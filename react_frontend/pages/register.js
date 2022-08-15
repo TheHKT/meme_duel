@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { Text, View, Button, TextInput, InputAccessoryView } from 'react-native';
 import { styles } from '../styles/style.js';
 import { useState } from 'react';
@@ -33,8 +33,9 @@ export const Register = ({ navigation }) => {
         }).catch(err => console.log(err));
     }
     return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
-            <View keyboardDismissMode="interactive">
+            <View>
                 <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
                 <TextInput  style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
@@ -62,6 +63,7 @@ export const Register = ({ navigation }) => {
                 </View>
             </View>
         </View>
+        </TouchableWithoutFeedback>
     )
 }
 
