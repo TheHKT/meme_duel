@@ -24,21 +24,35 @@ samples, guidance on mobile development, and a full API reference.
 ```
 
 ## List of required payload for different Endpoints
-### - PUT /login
+### PUT /login
 #### req.body:
 ```json
-    {
-        "username": "myUsername",
-        "pw": "myPw"
-    }
+{
+    "username": "myUsername",
+    "pw": "myPw"
+}
 ```
-### res.json:
+#### res.json:
 ```json
-    {
-        "loginSucess": false,
-        "Data": {},
-        "errorOccurred": false,
-        "errorMessage": "Unknown Error occurred!",
-    }
+{
+    "loginSucess": false,
+    "Data": {},
+    "errorOccurred": false,
+    "errorMessage": "Unknown Error occurred!",
+}
 ```
+### POST /registerPlayer
+#### req.body
+```json
+{
+    "username": "myUsername",
+    "email": "myEmail",
+    "pw": "myPw"               
+}
+```
+#### res.body
+```json
+{
 
+}
+```
