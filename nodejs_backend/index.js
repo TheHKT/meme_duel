@@ -76,18 +76,8 @@ async function main() {
         })
     });
 
-    /*app.post("/registerPlayer", async (req, res) => {
-        try {
-            const data = req.body;
-            const request = await sql.query(`INSERT INTO Player(username, email, pw) VALUES ('${data.username}', '${data.email}', '${data.pw}');`)
-            res.status(200).send(request)
-        } catch (err) {
-            console.log(data);
-            res.status(500).send(err);
-        }
-    });*/
-
     app.post("/registerPlayer", async (req, res) => {
+        const inputData = req.body;
         const resData = {
             registerSucess: false,
             Data: {
@@ -98,29 +88,28 @@ async function main() {
             errorOccurred: false,
             errorMessage: "Unknown Error occurred!",
         }
-        const inputData = req.body;
         var ps = new sql.PreparedStatement()
         ps.input('username', sql.VarChar)
         ps.input('email', sql.VarChar)
         ps.input('pw', sql.VarChar)
         ps.prepare("INSERT INTO Player(username, email, pw) VALUES (@username, @email, @pw)", err => {
             ps.execute({ username: inputData.username, email: inputData.email, pw: inputData.pw }, (err, result) => {
-                try {
-                    console(result)
-                        resData.registerSucess = true;
-                        console.log("SUCESSFUL REGISTER");
-                } catch (err) {
+                if (err) {
+                    resData.errorMessage = "Email or Username already taken!"
                     resData.errorOccurred = true;
-                    resData.errorMessage = err.message;
-                    console.log(err);
+                    console.log(resData.errorMessage);
+                } else {
+                    resData.registerSucess = true;
+                    console.log("SUCESSFUL REGISTER");
+                    console.log(result)
                 }
-                console.log(result)
                 ps.unprepare(err => {
                     if (err) {
-                        console.log(err);
+                        resData.errorMessage = "An DB error occurred!"
+                        resData.errorOccurred = true;
                         res.status(500).send(resData);
                     } else {
-                         res.status(200).send(resData);
+                        res.status(200).send(resData);
                     }
                 })
             })

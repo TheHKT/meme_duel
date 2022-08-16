@@ -30,7 +30,10 @@ export const Register = ({ navigation }) => {
                 pw: `${pw}`
 
             })
-        }).catch(err => console.log(err));
+        })
+        .then(res => res.json())
+        .then(response => {response.errorOccurred ? alert(response.errorMessage) : alert(JSON.stringify(response.Data))})
+        .catch(err => alert(err));
     }
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
