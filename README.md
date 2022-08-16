@@ -20,3 +20,7 @@ samples, guidance on mobile development, and a full API reference.
     "port":"3000",
     "hostIP":"172.20.10.4"
 }
+
+### List of required payload for diffrent Endpoints
+- /login
+
