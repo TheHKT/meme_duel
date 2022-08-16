@@ -24,6 +24,15 @@ samples, guidance on mobile development, and a full API reference.
 ```
 
 ## List of required payload for different Endpoints
+### Data
+```json
+{
+    "playerID": "myID",
+    "username": "myUsername",
+    "email": "myEmail",
+    "pw": "myPw",
+}
+```
 ### PUT /login
 #### req.body:
 ```json
