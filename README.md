@@ -24,15 +24,6 @@ samples, guidance on mobile development, and a full API reference.
 ```
 
 ## List of required payload for different Endpoints
-### Data
-```json
-{
-    "playerID": "myID",
-    "username": "myUsername",
-    "email": "myEmail",
-    "pw": "myPw",
-}
-```
 ### PUT /login
 #### req.body:
 ```json
@@ -45,7 +36,13 @@ samples, guidance on mobile development, and a full API reference.
 ```json
 {
     "loginSucess": false,
-    "Data": {},
+    "Data": 
+    {
+        "playerID": "myID",
+        "username": "myUsername",
+        "email": "myEmail",
+        "pw": "myPw",
+    },
     "errorOccurred": false,
     "errorMessage": "Unknown Error occurred!"
 }
@@ -63,7 +60,12 @@ samples, guidance on mobile development, and a full API reference.
 ```json
 {
     "registerSucess": false,
-    "Data": {},
+    "Data": 
+    {
+        "username": "myUsername",
+        "email": "myEmail",
+        "pw": "myPw"  
+    },
     "errorOccurred": false,
     "errorMessage": "Unknown Error occurred!"
 }
