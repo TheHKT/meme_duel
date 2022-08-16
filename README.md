@@ -38,7 +38,7 @@ samples, guidance on mobile development, and a full API reference.
     "loginSucess": false,
     "Data": {},
     "errorOccurred": false,
-    "errorMessage": "Unknown Error occurred!",
+    "errorMessage": "Unknown Error occurred!"
 }
 ```
 ### POST /registerPlayer
@@ -53,6 +53,9 @@ samples, guidance on mobile development, and a full API reference.
 #### res.body
 ```json
 {
-
+    "registerSucess": false,
+    "Data": {},
+    "errorOccurred": false,
+    "errorMessage": "Unknown Error occurred!"
 }
 ```
