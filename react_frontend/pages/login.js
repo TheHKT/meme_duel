@@ -21,7 +21,7 @@ export const Login = ({ navigation }) => {
             })
         })
         .then(res => res.json())
-        .then(response => response.errorOccurred ? alert(response.errorMessage) : alert (JSON.stringify(response)))
+        .then(response => response.errorOccurred ? alert(response.errorMessage) : alert (JSON.stringify(response.Data)))
         .catch(err => alert("An error occurred!"));
     }
     return (

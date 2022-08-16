@@ -1,64 +1,74 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, Button, TextInput } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Text, View, Button, TextInput, InputAccessoryView } from 'react-native';
 import { styles } from '../styles/style.js';
 import { useState } from 'react';
 import config from '../config/config.json'
+import * as React from "react";
+import { Input } from "@rneui/base";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 
 export const Register = ({ navigation }) => {
-    const [name, setName] = useState("Hektor");
-    const [person, setPerson] = useState({ name: "mario", age: 40 });
-    const [json, setJSON] = useState({ gzuz: "yeee" });
-
     const [pw, setPW] = useState("");
     const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("")
 
-    const clickHandler = () => {
-        setName("Paul");
-        setPerson({ name: "Luigi", age: 69 })
-        fetch(`http://${config.hostIP}:${config.port}/status`)
-            .then(res => res.json())
-            .then(response => setJSON(response))
-            .catch(err => console.log(err));
-    }
+    const inputAccessoryViewID = 'uniqueID';
 
-    const doLogin = () => {
-        fetch(`http://${config.hostIP}:${config.port}/login`, {
-            method: 'PUT',
+
+    const doRegister = () => {
+        fetch(`http://${config.hostIP}:${config.port}/registerPlayer`, {
+            method: 'POST',
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 username: `${username}`,
+                email: `${email}`,
                 pw: `${pw}`
+
             })
-        }).catch(err => console.log(err));
+        })
+        .then(res => res.json())
+        .then(response => {response.errorOccurred ? alert(response.errorMessage) : alert(JSON.stringify(response.Data))})
+        .catch(err => alert(err));
     }
     return (
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
             <View>
-                <Text style={styles.header}>LOGIN</Text>
+                <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
-                <TextInput style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
+                <TextInput  style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
                 <Text>Password: </Text>
                 <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
+                <Text>E-Mail: </Text>
+                <Input
+                    containerStyle={styles.input}
+                    disabledInputStyle={{ background: "#ddd" }}
+                    //inputContainerStyle={{}}
+                    //errorMessage="Oops! that's not correct."
+                    //errorProps={{}}
+                    //errorStyle={{}}
+                   // inputStyle={{}}
+                    label="User Form"
+                    labelStyle={{}}
+                    labelProps={{}}
+                    rightIcon={<Icon name="close" size={20} />}
+                    rightIconContainerStyle={{}}
+                    placeholder="Enter Email"
+                    onChangeText={(value) => setEmail(value)}
+                />
                 <View style={styles.button}>
-                    <Button title="Submit" onPress={doLogin} />
+                    <Button title="Submit" onPress={doRegister} />
                 </View>
             </View>
-            <StatusBar style="auto" />
-            <View>
-                <Text style={styles.boldText}>My name is {name}</Text>
-                <Text style={styles.boldText}>His name is {person.name} and his age is {person.age}</Text>
-                <Text>Enter your name:</Text>
-                <TextInput style={styles.input} placeholder="mein Name" onChangeText={(value) => setName(value)} />
-                <Text>{JSON.stringify(json)}</Text>
-            </View>
-            <View style={styles.button}>
-                <Button title="Update state" onPress={clickHandler} />
-            </View>
         </View>
+        </TouchableWithoutFeedback>
     )
 }
+
+
+

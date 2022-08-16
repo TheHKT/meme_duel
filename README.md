@@ -1,6 +1,6 @@
 # meme_duel
 
-A new Flutter project.
+Hektor ist eine schwule sau und muss abnehmen
 
 ## Getting Started
 
@@ -16,7 +16,57 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 ## Dont forget to add yout own IP in a ./config/config.json file
+```json
 {
     "port":"3000",
     "hostIP":"172.20.10.4"
 }
+```
+
+## List of required payload for different Endpoints
+### PUT /login
+#### req.body:
+```json
+{
+    "username": "myUsername",
+    "pw": "myPw"
+}
+```
+#### res.json:
+```json
+{
+    "loginSucess": false,
+    "Data": 
+    {
+        "playerID": "myID",
+        "username": "myUsername",
+        "email": "myEmail",
+        "pw": "myPw",
+    },
+    "errorOccurred": false,
+    "errorMessage": "Unknown Error occurred!"
+}
+```
+### POST /registerPlayer
+#### req.body
+```json
+{
+    "username": "myUsername",
+    "email": "myEmail",
+    "pw": "myPw"               
+}
+```
+#### res.body
+```json
+{
+    "registerSucess": false,
+    "Data": 
+    {
+        "username": "myUsername",
+        "email": "myEmail",
+        "pw": "myPw"  
+    },
+    "errorOccurred": false,
+    "errorMessage": "Unknown Error occurred!"
+}
+```
