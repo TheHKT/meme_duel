@@ -2,6 +2,8 @@ const config = require('../react_frontend/config/config.json');
 const DB_config = require("../react_frontend/config/dbConfig.json");
 const express = require("express");
 const sql = require("mssql");
+const player = require("./scripts/player");
+const { response } = require('express');
 
 async function main() {
     const app = express();
@@ -42,7 +44,7 @@ async function main() {
                             name: "Unkown User/Wrong pw",
                             message: "Username and/or password are wrong!",
                         };
-                    }else {
+                    } else {
                         resData.loginSucess = true;
                         console.log("SUCESSFUL LOGIN");
                         resData.Data =
@@ -105,6 +107,13 @@ async function main() {
                 })
             })
         })
+    });
+
+    app.get("/playerData", async (req, res) => {
+        const matchData = async() => {return await player.getMatch(req.body.playerID, sql)};
+        console.log(matchData());
+        matchData().then(res => console.log(res));
+        res.status(500).send({});
     });
 
     app.listen(config.port, () => {
