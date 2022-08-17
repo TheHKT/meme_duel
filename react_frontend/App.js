@@ -5,13 +5,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Login } from './pages/login';
 import { Register } from './pages/register';
+import { Home } from './pages/home';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login} options={{
+      <Stack.Navigator initialRouteName={"Login"}>
+        <Stack.Screen name="Login" component={Login} initialParams={{username:"", pw:""}} options={{
           headerRight: () => (
             <Button
               onPress={() => alert('This is a button!')}
@@ -21,6 +22,7 @@ export default function App() {
           ),
         }} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
   );

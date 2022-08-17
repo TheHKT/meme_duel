@@ -9,9 +9,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 
-export const Register = ({ navigation }) => {
-    const [pw, setPW] = useState("");
-    const [username, setUsername] = useState("");
+export const Register = ({ navigation, route }) => {
+    const [pw, setPW] = useState(route.params.pw);
+    const [username, setUsername] = useState(route.params.username);
     const [email, setEmail] = useState("")
 
     const inputAccessoryViewID = 'uniqueID';
@@ -32,7 +32,8 @@ export const Register = ({ navigation }) => {
             })
         })
         .then(res => res.json())
-        .then(response => {response.errorOccurred ? alert(response.errorMessage) : alert(JSON.stringify(response.Data))})
+        .then(response => {response.errorOccurred ? alert(response.errorMessage) : alert(JSON.stringify(response.Data)); return response })
+        .then(response => {if(!response.errorOccurred){navigation.navigate('Login', {username: username, pw: pw})}})
         .catch(err => alert(err));
     }
     return (
@@ -41,9 +42,9 @@ export const Register = ({ navigation }) => {
             <View>
                 <Text style={styles.header}>Register</Text>
                 <Text>Username:</Text>
-                <TextInput  style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} />
+                <TextInput  style={styles.input} placeholder="{username}" onChangeText={(value) => setUsername(value)} defaultValue={username} />
                 <Text>Password: </Text>
-                <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} />
+                <TextInput style={styles.input} placeholder="{pw}" onChangeText={(value) => setPW(value)} defaultValue={pw}/>
                 <Text>E-Mail: </Text>
                 <Input
                     containerStyle={styles.input}

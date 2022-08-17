@@ -4,9 +4,10 @@ import { styles } from '../styles/style.js';
 import { useState } from 'react';
 import config from '../config/config.json'
 
-export const Login = ({ navigation }) => {
-    const [pw, setPW] = useState("");
-    const [username, setUsername] = useState("");
+export const Login = ({ navigation, route }) => {
+    const [pw, setPW] = useState(route.params.pw);
+    const [username, setUsername] =  useState(route.params.username);
+    const [input, setInput] = useState({});
 
     const doLogin = () => {
         fetch(`http://${config.hostIP}:${config.port}/login`, {
@@ -21,8 +22,9 @@ export const Login = ({ navigation }) => {
             })
         })
         .then(res => res.json())
-        .then(response => response.errorOccurred ? alert(response.errorMessage) : alert (JSON.stringify(response.Data)))
+        .then(response => response.errorOccurred ? alert(response.errorMessage) : navigation.navigate('Home', response.Data))
         .catch(err => alert("An error occurred!"));
+        setInput({username: username, pw: pw})
     }
     return (
         <View style={styles.container}>
@@ -40,7 +42,7 @@ export const Login = ({ navigation }) => {
                 title="Register"
                 style={styles.button}
                 onPress={() =>
-                    navigation.navigate('Register', { name: 'Jane' })
+                    navigation.navigate('Register', input)
                 }
             />
         </View>
